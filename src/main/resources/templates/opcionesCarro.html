@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo de Administradores</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/admin.css" rel="stylesheet" />
+    <style>
+         .navbar-custom {
+            background-color:rgb(255, 198, 10); /* Color amarillo */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+        <a class="navbar-brand" style="color: rgb(0, 0, 0);" href="#">Detalles Carros</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" style="color: rgb(0, 0, 0);  font-size: 20px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Listas
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/controller_carro/marca">Lista Marca</a>
+                        <a class="dropdown-item" href="/controller_carro/modelo">Lista Modelo</a>
+                        <a class="dropdown-item" href="/controller_carro/tipo">Lista Tipo</a>
+                    </div>
+                </li>
+            </ul>
+            <a href="/controller_carro/gestionar" class="btn btn-warning text-dark fw-bold mr-3">Volver</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2>Agregar Marca</h2>
+            </div>
+            <div class="card-body">
+                <form class="form-container">
+                    <div class="form-group">
+                        <label for="car-name">Nombre</label>
+                        <input type="text" class="form-control" id="car-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="car-price">Origen</label>
+                        <input type="text" class="form-control" id="car-price" required>
+                    </div>
+                    <button type="submit" class="btn btn-warning">Agregar Marca</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2>Agregar Modelo</h2>
+            </div>
+            <div class="card-body">
+                <form class="form-container">
+                    <div class="form-group">
+                        <label for="car-name">Nombre</label>
+                        <input type="text" class="form-control" id="car-name" required>
+                    </div>
+                    <button type="submit" class="btn btn-warning">Agregar Modelo</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2>Agregar Tipo</h2>
+            </div>
+            <div class="card-body">
+                <form class="form-container">
+                    <div class="form-group">
+                        <label for="car-name">Nombre</label>
+                        <input type="text" class="form-control" id="car-name" required>
+                    </div>
+                    <button type="submit" class="btn btn-warning">Agregar Tipo</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

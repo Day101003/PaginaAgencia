@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo de Administradores</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/carro.css" rel="stylesheet" />
+    <style>
+        .navbar-custom {
+            background-color: rgb(255, 198, 10);
+            /* Color amarillo */
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
+        <a class="navbar-brand" href="/">Carros</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+
+                <a href="/controller_carro/listaCar" class="btn btn-warning text-dark fw-bold mr-3">Lista Carros</a>
+            </ul>
+            <a href="/controller_carro/opciones" class="btn btn-warning text-dark fw-bold mr-3">Detalles Carros</a>
+            <a href="/admin" class="btn btn-warning text-dark fw-bold">Administrador</a>
+        </div>
+    </nav>
+    
+
+    <div class="container mt-5 pt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2>Agregar Carro</h2>
+            </div>
+            <div class="card-body">
+                <form class="form-container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="car-name">Nombre</label>
+                                <input type="text" class="form-control" id="car-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-price">Precio</label>
+                                <input type="text" class="form-control" id="car-price" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-color">Color</label>
+                                <input type="text" class="form-control" id="car-color" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-status">Estado</label>
+                                <input type="text" class="form-control" id="car-status" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-year">Año</label>
+                                <input type="text" class="form-control" id="car-year" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-fuel">Combustible</label>
+                                <input type="text" class="form-control" id="car-fuel" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-doors">Puertas</label>
+                                <input type="text" class="form-control" id="car-doors" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-observations">Observaciones</label>
+                                <input type="text" class="form-control" id="car-observations" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="car-transmission">Transmisión</label>
+                                <input type="text" class="form-control" id="car-transmission" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-mileage">Kilometraje</label>
+                                <input type="text" class="form-control" id="car-mileage" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-plate">Placa</label>
+                                <input type="text" class="form-control" id="car-plate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-vin">VIN</label>
+                                <input type="text" class="form-control" id="car-vin" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-availability">Disponibilidad</label>
+                                <input type="text" class="form-control" id="car-availability" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-brand">Marca</label>
+                                <select class="form-control" id="car-brand" required>
+                                    <option value="">Seleccione una marca</option>
+                                    <option value="marca1">Marca 1</option>
+                                    <option value="marca2">Marca 2</option>
+                                    <option value="marca3">Marca 3</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-type">Tipo</label>
+                                <select class="form-control" id="car-type" required>
+                                    <option value="">Seleccione un tipo</option>
+                                    <option value="tipo1">Tipo 1</option>
+                                    <option value="tipo2">Tipo 2</option>
+                                    <option value="tipo3">Tipo 3</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-model">Modelo</label>
+                                <select class="form-control" id="car-model" required>
+                                    <option value="">Seleccione un modelo</option>
+                                    <option value="modelo1">Modelo 1</option>
+                                    <option value="modelo2">Modelo 2</option>
+                                    <option value="modelo3">Modelo 3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imagen (debajo del formulario, centrada y con mismo ancho que los campos) -->
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-md-6">
+                            <div class="p-4 border rounded shadow-sm" style="background-color: #fafafa;">
+                                <label for="car-image" class="d-block font-weight-bold text-center mb-3">Imagen</label>
+                                <input type="file" class="form-control-file mx-auto" id="car-image" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-warning mt-3">Agregar Carro</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

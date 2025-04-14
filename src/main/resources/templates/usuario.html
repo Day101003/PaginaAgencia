@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo de Administradores</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <link href="/css/admin.css" rel="stylesheet" />
+    <style>
+         .navbar-custom {
+            background-color:rgb(255, 198, 10); /* Color amarillo */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
+        <a class="navbar-brand" style="color: rgb(0, 0, 0);" href="">Administrador</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <a href="/controller_carro/gestionar" class="btn btn-warning text-dark fw-bold mr-3">Agregar Carro</a>
+            <a href="/"class="btn btn-warning text-dark fw-bold mr-3">Salir</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2>Agregar Usuario</h2>
+            </div>
+            <div class="card-body">
+                <form class="form-container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="car-name">Nombre</label>
+                                <input type="text" class="form-control" id="car-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-price">Contraseña</label>
+                                <input type="text" class="form-control" id="car-price" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-price">Teléfono</label>
+                                <input type="text" class="form-control" id="car-price" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="car-registration-date">Fecha de registro</label>
+                                <input type="date" class="form-control" id="car-registration-date" name="fechaRegistro" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-price">Correo electrónico</label>
+                                <input type="text" class="form-control" id="car-price" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="car-price">Tipo Usuario</label>
+                                <input type="text" class="form-control" id="car-price" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="car-image">Imagen</label>
+                                <input type="file" class="form-control" id="car-image" required>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-warning mt-3">Agregar Usuario</button>
+                                </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mt-5">
+            <div class="card-header">
+                <h2>Lista de Usuarios</h2>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Teléfono</th>
+                            <th>Correo</th>
+                            <th>Tipo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>123456789</td>
+                            <td>john@example.com</td>
+                            <td>Administrador</td>
+                            <td>
+                                <button class="btn btn-warning btn-custom">
+                                    <i class="fas fa-edit"></i> 
+                                </button>
+                                <button class="btn btn-danger btn-custom">
+                                    <i class="fas fa-trash"></i> 
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td>987654321</td>
+                            <td>jane@example.com</td>
+                            <td>Usuario</td>
+                            <td>
+                                <a href="#" class="btn btn-warning btn-custom"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="btn btn-danger btn-custom"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
