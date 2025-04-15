@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -15,9 +17,9 @@ import jakarta.persistence.Table;
 public class Orden {
     
 @Id
-    
-    @Column(name = "id_orden", nullable = false)
-    private int id_orden;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @Column(name= "id_orden", nullable= false)
+    private long id_orden;
     @Column(name = "fecha_orden", nullable = false)
     private LocalDate fecha_orden;
     @Column(name = "precio", nullable = false)
@@ -32,19 +34,19 @@ public class Orden {
     public Orden() {
     }
 
-    public Orden(int id_orden, LocalDate fecha_orden, int precio, boolean estado_pago, Usuario usuario) {
-        this.id_orden = id_orden;
+    public Orden( LocalDate fecha_orden, int precio, boolean estado_pago, Usuario usuario) {
+       
         this.fecha_orden = fecha_orden;
         this.precio = precio;
         this.estado_pago = estado_pago;
         this.usuario = usuario;
     }
 
-    public int getId_orden() {
+    public long getId_orden() {
         return id_orden;
     }
 
-    public void setId_orden(int id_orden) {
+    public void setId_orden(long id_orden) {
         this.id_orden = id_orden;
     }
 

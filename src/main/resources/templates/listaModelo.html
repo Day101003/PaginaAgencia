@@ -32,9 +32,9 @@
                         Listas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/controller_carro/marca">Lista Marca</a>
-                        <a class="dropdown-item" href="/controller_carro/modelo">Lista Modelo</a>
-                        <a class="dropdown-item" href="/controller_carro/tipo">Lista Tipo</a>
+                        <a class="dropdown-item" href="/marcas/marca">Lista Marca</a>
+                        <a class="dropdown-item" href="/modelos/modelo">Lista Modelo</a>
+                        <a class="dropdown-item" href="/tipos/tipo">Lista Tipo</a>
                     </div>
                 </li>
             </ul>
@@ -52,32 +52,23 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Modelo A</td>
-                    <td>
-                        <button class="btn btn-warning btn-custom">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-danger btn-custom">
-                            <i class="fas fa-trash"></i> 
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Modelo B</td>
-                    <td>
-                        <button class="btn btn-warning btn-custom">
-                            <i class="fas fa-edit"></i> 
-                        </button>
-                        <button class="btn btn-danger btn-custom">
-                            <i class="fas fa-trash"></i> 
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
+          <tbody>
+    <tr th:each="modelo : ${listaModelo}">
+        <td th:text="${modelo.id_modelo}">Id</td>
+        <td th:text="${modelo.nombre_modelo}">Nombre</td> 
+        <td>
+            <a th:href="@{/modelos/editar/{id}(id=${modelo.id_modelo})}" class="btn btn-warning btn-custom">
+                <i class="fas fa-edit"></i> 
+            </a>
+            <form th:action="@{/modelos/eliminar/{id}(id=${modelo.id_modelo})}" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este modelo?');">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </form>
+        </td>
+    </tr>
+</tbody>
+
         </table>
     </div>
 

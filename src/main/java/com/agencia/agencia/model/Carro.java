@@ -3,6 +3,8 @@ package com.agencia.agencia.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -11,11 +13,11 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Carro")
 public class Carro {
-       
-    @Id
     
-    @Column(name = "id_carro", nullable = false)
-    private int id_carro;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @Column(name= "id_carro", nullable= false)
+    private long id_carro;
 
     @Column(name = "precio_carro", nullable = false)
     private int precio_carro;
@@ -98,7 +100,7 @@ public class Carro {
         this.imagenCarros = imagenCarros;
     }
 
-    public int getId_carro() {
+    public long getId_carro() {
         return id_carro;
     }
 

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -12,8 +14,9 @@ import jakarta.persistence.Table;
 public class Usuario {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     @Column(name= "id_usuario", nullable= false)
-    private int id_usuario ;
+    private long id_usuario;
 
     @Column(name= "nombre", nullable= false)
     private String nombre;
@@ -51,11 +54,11 @@ public class Usuario {
         this.ruta_imagen_usuario = ruta_imagen_usuario;
     }
 
-    public int getId_usuario() {
+    public long getId_usuario() {
         return id_usuario;
     }
 
-    public void setId_usuario(int id_usuario) {
+    public void setId_usuario(long id_usuario) {
         this.id_usuario = id_usuario;
     }
 

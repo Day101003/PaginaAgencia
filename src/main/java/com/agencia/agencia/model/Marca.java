@@ -2,6 +2,8 @@ package com.agencia.agencia.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -10,8 +12,9 @@ import jakarta.persistence.Table;
 public class Marca {
     
  @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     @Column(name= "id_marca", nullable= false)
-    private int id_marca;
+    private long id_marca;
     @Column(name= "nombre_marca", nullable= false)
     private String nombre_marca;
     @Column(name= "origen_marca", nullable= false)
@@ -22,18 +25,18 @@ public class Marca {
     }
 
 
-    public Marca(int id_marca, String nombre_marca, String origen_marca) {
-        this.id_marca = id_marca;
+    public Marca(String nombre_marca, String origen_marca) {
+     
         this.nombre_marca = nombre_marca;
         this.origen_marca = origen_marca;
     }
 
 
-    public int getId_marca() {
+    public long getId_marca() {
         return id_marca;
     }
 
-    public void setId_marca(int id_marca) {
+    public void setId_marca(long id_marca) {
         this.id_marca = id_marca;
     }
 

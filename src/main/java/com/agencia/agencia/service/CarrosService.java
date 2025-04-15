@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.agencia.agencia.model.Carro;
-import com.agencia.agencia.model.Usuario;
 import com.agencia.agencia.repository.CarroRepository;
 
 @Service
@@ -33,7 +32,7 @@ public class CarrosService {
         carroRepository.deleteById(id_carro);
     }
 
-    public  Carro actualizaUsuario(Carro id_carro){
+    public  Carro actualizaCarro(Carro id_carro){
         return carroRepository.save(id_carro);
     }
 }
