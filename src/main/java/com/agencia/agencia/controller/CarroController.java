@@ -96,6 +96,18 @@ public String editar(@PathVariable int id, Model model) {
         carrosService.eliminar(id);
         return "redirect:/controller_carro/listaCar"; 
     }
+
+
+    @PostMapping("/cambiarEstado/{id}")
+public String cambiarEstado(@PathVariable int id) {
+    Carro carro = carrosService.consultar(id);
+    if (carro != null) {
+        carro.setEstado(carro.getEstado() == 1 ? 0 : 1); // Cambia de activo a inactivo o viceversa
+        carrosService.actualizaCarro(carro); // Asegúrate de tener un método en tu servicio para actualizar el carro
+    }
+    return "redirect:/controller_carro/listaCar";
+}
+
     
 
 }

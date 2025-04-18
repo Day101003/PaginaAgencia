@@ -50,11 +50,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="carro : ${carros}"> 
+                            <tr th:each="carro : ${carros}">
                                 <td th:text="${carro.id_carro}">Id</td>
                                 <td th:text="${carro.precio_carro}">Precio</td>
                                 <td th:text="${carro.color_carro}">Color</td>
-                                <td th:text="${carro.estado}">Estado</td>
+                                <td>
+                                    <span th:text="${carro.estado == 1 ? 'Activo' : 'Inactivo'}"></span>
+                                </td>
                                 <td th:text="${carro.ano}">Año</td>
                                 <td th:text="${carro.combustible}">Combustible</td>
                                 <td th:text="${carro.numero_puertas}">Numero Puertas</td>
@@ -63,27 +65,39 @@
                                 <td th:text="${carro.kilometraje}">Kilometraje</td>
                                 <td th:text="${carro.numero_placa}">Placa</td>
                                 <td th:text="${carro.numero_vin}">VIN</td>
-                                <td th:text="${carro.disponibilidad ? 'Disponible' : 'No Disponible'}">Disponibilidad</td>
+                                <td th:text="${carro.disponibilidad ? 'Disponible' : 'No Disponible'}">Disponibilidad
+                                </td>
                                 <td th:text="${carro.marca != null ? carro.marca.nombre_marca : 'Sin Marca'}">Marca</td>
                                 <td th:text="${carro.tipo != null ? carro.tipo.nombre : 'Sin Tipo'}">Tipo</td>
-                                <td th:text="${carro.modelo != null ? carro.modelo.nombre_modelo : 'Sin Modelo'}">Modelo</td>
+                                <td th:text="${carro.modelo != null ? carro.modelo.nombre_modelo : 'Sin Modelo'}">Modelo
+                                </td>
                                 <td>
-                                    <img th:src="@{'/' + ${carro.imagenCarros != null ? carro.imagenCarros.ruta_imagen : '/path/to/default/image.jpg'}}" 
-                                         alt="Imagen del carro" style="width: 100px; height: auto;"/>
+                                    <img th:src="@{'/' + ${carro.imagenCarros != null ? carro.imagenCarros.ruta_imagen : '/path/to/default/image.jpg'}}"
+                                        alt="Imagen del carro" style="width: 100px; height: auto;" />
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Acciones">
-                                        <a th:href="@{/controller_carro/editar/{id}(id=${carro.id_carro})}" class="btn btn-warning btn-custom">
+                                        <a th:href="@{/controller_carro/editar/{id}(id=${carro.id_carro})}"
+                                            class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <form th:action="@{/controller_carro/eliminar/{id}(id=${carro.id_carro})}" method="post" style="display:inline">
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Eliminar este carro?')">
+                                        <form th:action="@{/controller_carro/eliminar/{id}(id=${carro.id_carro})}"
+                                            method="post" style="display:inline">
+                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                onclick="return confirm('¿Eliminar este carro?')">
                                                 <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                        <form th:action="@{/controller_carro/cambiarEstado/{id}(id=${carro.id_carro})}"
+                                            method="post" style="display:inline">
+                                            <button type="submit" class="btn btn-info btn-sm"
+                                                onclick="return confirm('¿Cambiar estado de este carro?')">
+                                                <i class="fas fa-toggle-on"></i>
+                                                <span th:text="${carro.estado == 1 ? '' : ''}"></span>
                                             </button>
                                         </form>
                                     </div>
                                 </td>
-                                
                             </tr>
                         </tbody>
                     </table>
