@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -8,16 +8,13 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
     <link href="/css/lista.css" rel="stylesheet" />
-    
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
         <a class="navbar-brand" href="/">Lista De Carros</a>
         <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-            </ul>
-           
+            <ul class="navbar-nav mr-auto"></ul>
             <a href="/controller_carro/gestionar" class="btn btn-warning text-dark fw-bold">Volver</a>
         </div>
     </nav>
@@ -32,7 +29,7 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
+                                <th>Id</th>
                                 <th>Precio</th>
                                 <th>Color</th>
                                 <th>Estado</th>
@@ -48,42 +45,46 @@
                                 <th>Marca</th>
                                 <th>Tipo</th>
                                 <th>Modelo</th>
+                                <th>Imagen</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Toyota Corolla</td>
-                                <td>$25,000</td>
-                                <td>Gris</td>
-                                <td>Disponible</td>
-                                <td>2020</td>
-                                <td>Gasolina</td>
-                                <td>4</td>
-                                <td>Excelente estado</td>
-                                <td>Automática</td>
-                                <td>25,000 km</td>
-                                <td>ABC123</td>
-                                <td>1HGBH41JXMN109186</td>
-                                <td>Sí</td>
-                                <td>Toyota</td>
-                                <td>Sedán</td>
-                                <td>Corolla</td>
+                            <tr th:each="carro : ${carros}"> 
+                                <td th:text="${carro.id_carro}">Id</td>
+                                <td th:text="${carro.precio_carro}">Precio</td>
+                                <td th:text="${carro.color_carro}">Color</td>
+                                <td th:text="${carro.estado}">Estado</td>
+                                <td th:text="${carro.ano}">Año</td>
+                                <td th:text="${carro.combustible}">Combustible</td>
+                                <td th:text="${carro.numero_puertas}">Numero Puertas</td>
+                                <td th:text="${carro.observaciones}">Observaciones</td>
+                                <td th:text="${carro.transmision}">Transmisión</td>
+                                <td th:text="${carro.kilometraje}">Kilometraje</td>
+                                <td th:text="${carro.numero_placa}">Placa</td>
+                                <td th:text="${carro.numero_vin}">VIN</td>
+                                <td th:text="${carro.disponibilidad ? 'Disponible' : 'No Disponible'}">Disponibilidad</td>
+                                <td th:text="${carro.marca != null ? carro.marca.nombre_marca : 'Sin Marca'}">Marca</td>
+                                <td th:text="${carro.tipo != null ? carro.tipo.nombre : 'Sin Tipo'}">Tipo</td>
+                                <td th:text="${carro.modelo != null ? carro.modelo.nombre_modelo : 'Sin Modelo'}">Modelo</td>
                                 <td>
-                                    <div class="btn-group">
-                                        <button class="btn btn-warning btn-custom">
-                                            <i class="fas fa-edit"></i> 
-                                        </button>
-                                        <button class="btn btn-danger btn-custom">
-                                            <i class="fas fa-trash"></i> 
-                                        </button>
-                                        <button class="btn btn-success btn-custom">
-                                            <i class="fas fa-check-circle"></i> 
-                                        </button>
+                                    <img th:src="@{'/' + ${carro.imagenCarros != null ? carro.imagenCarros.ruta_imagen : '/path/to/default/image.jpg'}}" 
+                                         alt="Imagen del carro" style="width: 100px; height: auto;"/>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Acciones">
+                                        <a th:href="@{/controller_carro/editar/{id}(id=${carro.id_carro})}" class="btn btn-warning btn-custom">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form th:action="@{/controller_carro/eliminar/{id}(id=${carro.id_carro})}" method="post" style="display:inline">
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Eliminar este carro?')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
+                                
                             </tr>
-                            <!-- Agrega más filas de datos de carros aquí -->
                         </tbody>
                     </table>
                 </div>

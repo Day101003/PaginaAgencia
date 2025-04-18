@@ -29,6 +29,8 @@
                         <a class="dropdown-item" href="/marcas/marca">Lista Marca</a>
                         <a class="dropdown-item" href="/modelos/modelo">Lista Modelo</a>
                         <a class="dropdown-item" href="/tipos/tipo">Lista Tipo</a>
+                        <a class="dropdown-item" href="/imagenes/imagen">Lista Imagen</a>
+
                     </div>
                 </li>
             </ul>
@@ -86,6 +88,25 @@
         </div>
     </form>
     
+
+    <form action="/imagenes/guardar" method="post" enctype="multipart/form-data" class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2>Agregar Imagen</h2>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="tipo">Tipo</label>
+                    <input type="text" name="tipo" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="imagen">Imagen</label>
+                    <input type="file" name="imagen" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-warning">Agregar Imagen</button>
+            </div>
+        </div>
+    </form>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
