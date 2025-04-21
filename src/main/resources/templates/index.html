@@ -22,7 +22,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top py-1">
                 <div class="container">
                   <a class="navbar-brand" href="#page-top">
-                    <img src="assets/img/logo.png" alt="..." style="width: 150px; height: auto;">
+                    <img src="assets/img/logo.png" alt="Logo JDNK" style="width: 150px; height: auto;">
                   </a>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -34,10 +34,37 @@
                       <li class="nav-item"><a class="nav-link" href="#team">Equipo</a></li>
                       <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
                     </ul>
-                    <button class="btn btn-warning ms-3 text-dark fw-bold" onclick="window.location.href='/admin'">Administradores</button>
+              
+                  <!-- Botón Ingresar -->
+<button id="loginButton" class="btn btn-outline-primary ms-2 fw-semibold" onclick="window.location.href='/home'">
+    Ingresar
+  </button>
+  
+ <!-- Perfil de Usuario (visible solo si hay sesión) -->
+<div id="userProfile" class="dropdown d-none">
+    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle"
+       id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <img id="userAvatar" src="" alt="Perfil" width="40" height="40" class="rounded-circle me-2">
+      <span id="userName" class="fw-semibold text-dark"></span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="userDropdown">
+      <li><h6 class="dropdown-header" id="userEmail"></h6></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item text-danger" href="#" onclick="logout()">Cerrar sesión</a></li>
+    </ul>
+  </div>
+  
+  
+              
+                    <!-- Botón de administrador -->
+                    <button class="btn btn-warning ms-2 fw-bold text-dark" onclick="window.location.href='/admin'">
+                      Administradores
+                    </button>
+              
+                    <!-- Icono del carrito -->
                     <a href="#" class="btn btn-dark btn-social mx-2">
-                        <i class="fas fa-shopping-cart"></i>
-                      </a>   <!-- Carrito-->
+                      <i class="fas fa-shopping-cart"></i>
+                    </a>
                   </div>
                 </div>
               </nav>
@@ -67,6 +94,8 @@
                 <a class="btn btn-primary btn-xl text-uppercase" href="#services">Más información</a>
             </div>
         </header>
+
+        
         <!-- Modelos-->
         <section class="page-section" id="services">
             <div class="container">
@@ -600,5 +629,53 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script>
+            window.addEventListener('DOMContentLoaded', async () => {
+              // ✅ Buscar el token en la cookie
+              const cookieValue = document.cookie.split('; ').find(row => row.startsWith('token='));
+              const token = cookieValue ? cookieValue.split('=')[1] : null;
+          
+              const loginBtn = document.getElementById('login-btn');
+              const profileSection = document.getElementById('user-profile-section');
+              const nameDisplay = document.getElementById('user-name-display');
+              const profileImg = document.getElementById('navbar-profile-img');
+          
+              if (token) {
+                console.log("🔑 Token detectado:", token);
+          
+                try {
+                  const res = await fetch('/api/user/profile', {
+                    headers: {
+                      'Authorization': 'Bearer ' + token
+                    }
+                  });
+          
+                  if (res.ok) {
+                    const user = await res.json();
+                    console.log("✅ Usuario:", user);
+          
+                    nameDisplay.textContent = user.nombre || "Usuario";
+                    profileImg.src = user.ruta_imagen_usuario || "/assets/img/FotoPerfil/default.png";
+          
+                    loginBtn.classList.add('d-none');
+                    profileSection.classList.remove('d-none');
+                  } else {
+                    console.warn("⚠️ Token no válido o expirado");
+                  }
+                } catch (err) {
+                  console.error("❌ Error al cargar perfil:", err);
+                }
+              } else {
+                console.warn("⚠️ JWT_TOKEN no encontrado en cookies.");
+              }
+            });
+          
+            function logout() {
+              document.cookie = 'JWT_TOKEN=; Max-Age=0; path=/';
+              window.location.href = '/home';
+            }
+          </script>
+              
+                 
     </body>
 </html>

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.agencia.agencia.model.ImagenCarros;
-import com.agencia.agencia.model.Usuario;
 import com.agencia.agencia.repository.ImagenCarrosRepository;
 
 @Service
