@@ -80,3 +80,16 @@ input:focus {
 .redirect-login a:hover {
     text-decoration: underline;
 }
+
+
+.password-wrapper {
+    position: relative;
+}
+
+.toggle-password {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
