@@ -103,106 +103,59 @@
             </div>
         </section>
         <!-- Portfolio Grid-->
-        <section class="page-section bg-light" id="portfolio">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Carros</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 1-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/carros/BMW.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">BMW</div>
-                                <div class="portfolio-caption-subheading text-muted">Illustration</div>
+    <section class="page-section bg-light" id="portfolio">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Nuestros Vehículos</h2>
+                <h3 class="section-subheading text-muted">Descubre nuestra amplia selección de carros</h3>
+            </div>
+            <div class="row">
+                <div th:each="carro : ${carros}" class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <!-- Imagen del carro -->
+                        <a th:href="@{/carros/{id}(id=${carro.id_carro})}">
+                            <img th:src="@{'/' + ${carro.imagenCarros != null ? carro.imagenCarros.ruta_imagen : 'assets/img/default-car.jpg'}}"
+                                class="card-img-top" alt="Imagen del vehículo"
+                                style="height: 200px; object-fit: cover;">
+                        </a>
+
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <span th:text="${carro.marca != null ? carro.marca.nombre_marca : 'Marca'}"></span>
+                                <span th:text="${carro.modelo != null ? carro.modelo.nombre_modelo : 'Modelo'}"></span>
+                            </h5>
+
+                            <div class="car-details">
+                                <p class="card-text">
+                                    <strong>Año:</strong> <span th:text="${carro.ano}"></span><br>
+                                    <strong>Color:</strong> <span th:text="${carro.color_carro}"></span><br>
+                                    <strong>Precio:</strong> $<span
+                                        th:text="${#numbers.formatDecimal(carro.precio_carro, 1, 2, 'COMMA')}"></span><br>
+                                    <strong>Placa:</strong> <span th:text="${carro.numero_placa}"></span>
+                                </p>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 2-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/carros/honda.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Honda</div>
-                                <div class="portfolio-caption-subheading text-muted">Graphic Design</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <!-- Portfolio item 3-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/carros/ford.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Ford</div>
-                                <div class="portfolio-caption-subheading text-muted">Identity</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
-                        <!-- Portfolio item 4-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/carros/toyota.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Toyota</div>
-                                <div class="portfolio-caption-subheading text-muted">Branding</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
-                        <!-- Portfolio item 5-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal5">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/carros/tesla.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Tesla</div>
-                                <div class="portfolio-caption-subheading text-muted">Website Design</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <!-- Portfolio item 6-->
-                        <div class="portfolio-item">
-                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal6">
-                                <div class="portfolio-hover">
-                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
-                                </div>
-                                <img class="img-fluid" src="assets/img/carros/lexus.jpg" alt="..." />
-                            </a>
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Lexus</div>
-                                <div class="portfolio-caption-subheading text-muted">Photography</div>
+
+                        <div class="card-footer bg-transparent">
+                            <div class="btn-group d-flex justify-content-between">
+                          
+                                </a>
+                                <span th:class="${carro.disponibilidad} ? 'badge bg-success' : 'badge bg-danger'"
+                                    th:text="${carro.disponibilidad} ? 'Disponible' : 'Vendido'">
+                                </span>
+
+                                <button class="btn btn-sm btn-warning btn-agregar-carrito"
+                                    th:disabled="${!carro.disponibilidad}" data-id-carro="${carro.id_carro}">
+                                    <i class="fas fa-cart-plus"></i> Añadir
+                                </button>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
        
         <!-- Team-->
         <section class="page-section bg-light" id="team">
