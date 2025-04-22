@@ -1,73 +1,46 @@
 package com.agencia.agencia.model;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
-    
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    @Column(name= "id_usuario", nullable= false)
-    private long id_usuario;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id_usuario;
 
-    @Column(name= "nombre", nullable= false)
-    private String nombre;
-    
-    @Column(name= "contrasena", nullable= false)
+
+    @Column(nullable = false)
     private String contrasena;
-    
-    @Column(name= "telefono", nullable= false)
-    private String telefono;
-    
-    @Column(name= "fecha_registro", nullable= false)
-    private LocalDate fecha_registro;
-    
-    @Column(name= "correo", nullable= false)
+
+    @Column(nullable = false, unique = true)
     private String correo;
-    
-    @Column(name= "tipo_usuario", nullable= false)
-    private int tipo_usuario;
-    
-    @Column(name= "ruta_imagen_usuario", nullable= false)
+
+    @Column(nullable = false)
+    private LocalDate fecha_registro;
+
+    @Column(nullable = false)
+    private String nombre;
+
+    @Column(nullable = false)
     private String ruta_imagen_usuario;
-    
-    public Usuario() {
-    }
 
-    public Usuario(int id_usuario, String nombre, String contrasena, String telefono, LocalDate fecha_registro,
-            String correo, int tipo_usuario, String ruta_imagen_usuario) {
-        this.id_usuario = id_usuario;
-        this.nombre = nombre;
-        this.contrasena = contrasena;
-        this.telefono = telefono;
-        this.fecha_registro = fecha_registro;
-        this.correo = correo;
-        this.tipo_usuario = tipo_usuario;
-        this.ruta_imagen_usuario = ruta_imagen_usuario;
-    }
+    @Column(nullable = false)
+    private String telefono;
 
-    public long getId_usuario() {
+    @Column(nullable = false)
+    private Integer tipo_usuario;
+
+    // === Getters y Setters ===
+
+    public Integer getId_usuario() {
         return id_usuario;
     }
 
-    public void setId_usuario(long id_usuario) {
+    public void setId_usuario(Integer id_usuario) {
         this.id_usuario = id_usuario;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public String getContrasena() {
@@ -78,12 +51,12 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public LocalDate getFecha_registro() {
@@ -94,20 +67,12 @@ public class Usuario {
         this.fecha_registro = fecha_registro;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public int getTipo_usuario() {
-        return tipo_usuario;
-    }
-
-    public void setTipo_usuario(int tipo_usuario) {
-        this.tipo_usuario = tipo_usuario;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getRuta_imagen_usuario() {
@@ -118,6 +83,19 @@ public class Usuario {
         this.ruta_imagen_usuario = ruta_imagen_usuario;
     }
 
+    public String getTelefono() {
+        return telefono;
+    }
 
-    
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public Integer getTipo_usuario() {
+        return tipo_usuario;
+    }
+
+    public void setTipo_usuario(Integer tipo_usuario) {
+        this.tipo_usuario = tipo_usuario;
+    }
 }
