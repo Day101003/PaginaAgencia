@@ -15,59 +15,57 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/css/styles.css" rel="stylesheet" />
+        
     </head>
     <body id="page-top">
         
-        <body>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top py-1">
-                <div class="container">
-                  <a class="navbar-brand" href="#page-top">
-                    <img src="assets/img/logo.png" alt="Logo JDNK" style="width: 150px; height: auto;">
-                  </a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#page-top">
+                    <img src="assets/img/logo.png" alt="Logo JDNK" style="height: 89px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarResponsive">
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto text-uppercase">
-                      <li class="nav-item"><a class="nav-link" href="#services">Modelos</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#portfolio">Carros</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#team">Equipo</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Modelos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#portfolio">Carros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">Equipo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
                     </ul>
-              
-                  <!-- Botón Ingresar -->
-<button id="loginButton" class="btn btn-outline-primary ms-2 fw-semibold" onclick="window.location.href='/home'">
-    Ingresar
-  </button>
-  
- <!-- Perfil de Usuario (visible solo si hay sesión) -->
-<div id="userProfile" class="dropdown d-none">
-    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle"
-       id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-      <img id="userAvatar" src="" alt="Perfil" width="40" height="40" class="rounded-circle me-2">
-      <span id="userName" class="fw-semibold text-dark"></span>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="userDropdown">
-      <li><h6 class="dropdown-header" id="userEmail"></h6></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item text-danger" href="#" onclick="logout()">Cerrar sesión</a></li>
-    </ul>
-  </div>
-  
-  
-              
+    
+                    <!-- Botón Ingresar -->
+                    <button id="loginButton" class="btn btn-outline-primary ms-2 fw-semibold" onclick="window.location.href='/home'">
+                        Ingresar
+                    </button>
+    
+                    <!-- Perfil de Usuario (visible solo si hay sesión) -->
+                    <div id="userProfile" class="dropdown d-none">
+                        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img id="userAvatar" src="" alt="Perfil" width="30" height="30" class="rounded-circle me-2">
+                            <span id="userName" class="fw-semibold text-dark"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="userDropdown">
+                            <li><h6 class="dropdown-header" id="userEmail"></h6></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="logout()">Cerrar sesión</a></li>
+                        </ul>
+                    </div>
+    
                     <!-- Botón de administrador -->
                     <button class="btn btn-warning ms-2 fw-bold text-dark" onclick="window.location.href='/admin'">
-                      Administradores
+                        Administradores
                     </button>
-              
+    
                     <!-- Icono del carrito -->
                     <a href="#" class="btn btn-dark btn-social mx-2">
-                      <i class="fas fa-shopping-cart"></i>
+                        <i class="fas fa-shopping-cart"></i>
                     </a>
-                  </div>
                 </div>
-              </nav>
+            </div>
+        </nav>
+    
         
             <script>
                 let lastScrollTop = 0;
@@ -95,7 +93,7 @@
             </div>
         </header>
 
-        <!-- Portfolio Grid-->
+    <!-- Portfolio Grid-->
     <section class="page-section bg-light" id="portfolio">
         <div class="container">
             <div class="text-center">
@@ -105,19 +103,16 @@
             <div class="row">
                 <div th:each="carro : ${carros}" class="col-lg-4 col-md-6 mb-4">
                     <div class="card h-100">
-                        <!-- Imagen del carro -->
-                        <a th:href="@{/carros/{id}(id=${carro.id_carro})}">
+                        <a class="portfolio-link" data-bs-toggle="modal" data-bs-target="#portfolioModal${carro.id_carro}">
                             <img th:src="@{'/' + ${carro.imagenCarros != null ? carro.imagenCarros.ruta_imagen : 'assets/img/default-car.jpg'}}"
                                 class="card-img-top" alt="Imagen del vehículo"
                                 style="height: 200px; object-fit: cover;">
                         </a>
-
                         <div class="card-body">
                             <h5 class="card-title">
                                 <span th:text="${carro.marca != null ? carro.marca.nombre_marca : 'Marca'}"></span>
                                 <span th:text="${carro.modelo != null ? carro.modelo.nombre_modelo : 'Modelo'}"></span>
                             </h5>
-
                             <div class="car-details">
                                 <p class="card-text">
                                     <strong>Año:</strong> <span th:text="${carro.ano}"></span><br>
@@ -128,27 +123,50 @@
                                 </p>
                             </div>
                         </div>
-
                         <div class="card-footer bg-transparent">
-                            <div class="btn-group d-flex justify-content-between">
-                          
-                                </a>
-                                <span th:class="${carro.disponibilidad} ? 'badge bg-success' : 'badge bg-danger'"
-                                    th:text="${carro.disponibilidad} ? 'Disponible' : 'Vendido'">
-                                </span>
-
-                                <button class="btn btn-sm btn-warning btn-agregar-carrito"
-                                    th:disabled="${!carro.disponibilidad}" data-id-carro="${carro.id_carro}">
-                                    <i class="fas fa-cart-plus"></i> Añadir
-                                </button>
-
-                            </div>
+                            <span th:class="${carro.disponibilidad} ? 'badge bg-success' : 'badge bg-danger'"
+                                th:text="${carro.disponibilidad} ? 'Disponible' : 'Vendido'">
+                            </span>
+                            <button class="btn btn-sm btn-warning btn-agregar-carrito"
+                                th:disabled="${!carro.disponibilidad}" data-id-carro="${carro.id_carro}">
+                                <i class="fas fa-cart-plus"></i> Añadir
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Portfolio Modals -->
+    <div th:each="carro : ${carros}" class="portfolio-modal modal fade" id="portfolioModal${carro.id_carro}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="modal-body">
+                                <h2 class="text-uppercase" th:text="${carro.marca.nombre_marca} + ' ' + ${carro.modelo.nombre_modelo}"></h2>
+                                <p class="item-intro text-muted">Perfecto para ti</p>
+                                <img th:src="@{'/' + ${carro.imagenCarros != null ? carro.imagenCarros.ruta_imagen : 'assets/img/default-car.jpg'}}" class="img-fluid d-block mx-auto" alt="..." />
+                                <p>
+                                    <strong>Año:</strong> <span th:text="${carro.ano}"></span><br>
+                                    <strong>Color:</strong> <span th:text="${carro.color_carro}"></span><br>
+                                    <strong>Precio:</strong> $<span th:text="${#numbers.formatDecimal(carro.precio_carro, 1, 2, 'COMMA')}"></span><br>
+                                    <strong>Placa:</strong> <span th:text="${carro.numero_placa}"></span><br>
+                                </p>
+                                <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                    <i class="fas fa-xmark me-1"></i> Cerrar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
        
         <!-- Team-->
         <section class="page-section bg-light" id="team">

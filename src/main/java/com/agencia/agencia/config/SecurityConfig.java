@@ -20,8 +20,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
-import static org.springframework.http.HttpMethod.*;
-
 @Configuration
 public class SecurityConfig {
 
@@ -30,8 +28,8 @@ public class SecurityConfig {
     private final PasswordEncoder passwordEncoder;
 
     public SecurityConfig(JwtTokenProvider jwtProvider,
-            UsuarioService usuarioService,
-            PasswordEncoder passwordEncoder) {
+                          UsuarioService usuarioService,
+                          PasswordEncoder passwordEncoder) {
         this.jwtProvider = jwtProvider;
         this.usuarioService = usuarioService;
         this.passwordEncoder = passwordEncoder;
@@ -39,29 +37,21 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
-            DaoAuthenticationProvider authProvider) throws Exception {
-        JwtAuthenticationFilter jwtFilter = new JwtAuthenticationFilter(jwtProvider, usuarioService);
+                                                   DaoAuthenticationProvider authProvider) throws Exception {
+        // JwtAuthenticationFilter jwtFilter = new JwtAuthenticationFilter(jwtProvider, usuarioService); // ❌ Lo quitamos por ahora
 
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable())
-                .headers(headers -> headers
-                        .crossOriginOpenerPolicy(coop -> coop.policy(CrossOriginOpenerPolicy.UNSAFE_NONE)))
-                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authProvider)
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(GET,
-                                "/", "/index", "/home", "/register", "/login", "/usuarios", "/admin",
-                                "/controller_carro/gestionar", "/controller_carro/opciones",
-                                "/controller_carro/marca", "/controller_carro/modelo", "/controller_carro/tipo",
-                                "/controller_carro/listaCar", "/marcas/marca", "/modelos/modelo", "/tipos/tipo",
-                                "/imagenes/imagen")
-                        .permitAll()
-                        .requestMatchers(POST, "/login", "/api/auth/**").permitAll()
-                        .requestMatchers("/css/**", "/js/**", "/images/**", "/assets/**").permitAll()
-                        .anyRequest().authenticated())
-                .formLogin(form -> form.disable()) // 🔥 Desactiva el login por defecto de Spring
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .csrf(csrf -> csrf.disable())
+            .headers(headers -> headers
+                .crossOriginOpenerPolicy(coop -> coop.policy(CrossOriginOpenerPolicy.UNSAFE_NONE)))
+            .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authenticationProvider(authProvider)
+            .authorizeHttpRequests(auth -> auth
+                .anyRequest().permitAll()) // ✅ Permitir TODO
+            .formLogin(form -> form.disable()); // 🔥 Desactiva login de formulario
+
+            // .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class); // 🔴 Comentado para prueba
 
         return http.build();
     }
@@ -89,7 +79,7 @@ public class SecurityConfig {
         cfg.setExposedHeaders(List.of("Authorization", "Set-Cookie"));
 
         UrlBasedCorsConfigurationSource src = new UrlBasedCorsConfigurationSource();
-        src.registerCorsConfiguration("/**", cfg);
+        src.registerCorsConfiguration("/", cfg);
         return src;
     }
 }

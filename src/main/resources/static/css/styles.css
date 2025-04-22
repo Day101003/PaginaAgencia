@@ -85,6 +85,22 @@
   box-sizing: border-box;
 }
 
+/* Estilos para la barra de navegación */
+.navbar {
+  padding: 0.5rem 1rem; /* Ajusta el padding */
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo semi-transparente */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.navbar-nav .nav-link {
+  font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+  padding: 0.5rem 1rem; /* Espaciado de los enlaces */
+}
+
+.navbar-brand img {
+  height: 40px; /* Altura de la imagen del logo */
+}
+
 .btn-social {
   width: 40px;
   height: 40px;
