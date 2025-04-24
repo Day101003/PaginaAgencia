@@ -51,8 +51,8 @@
                         <div class="form-group">
                             <label for="estado">Estado</label>
                             <select name="estado" class="form-control" required>
-                                <option value="1" th:selected="${carros.estado == 1}">Disponible</option>
-                                <option value="0" th:selected="${carros.estado == 0}">No Disponible</option>
+                                <option value="1" th:selected="${carros.estado == 1}">activo</option>
+                                <option value="0" th:selected="${carros.estado == 0}">Inactivo</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -91,8 +91,10 @@
                             <input type="text" name="numero_vin" class="form-control" th:value="${carros.numero_vin}" required>
                         </div>
                         <div class="form-group">
-                            <label for="disponibilidad">Disponibilidad</label>
-                            <input type="checkbox" name="disponibilidad" th:value="${carros.disponibilidad}" th:checked="${carros.disponibilidad}"> Disponible
+                            <select name="disponibilidad" class="form-control" required>
+                                <option value="1" th:selected="${carros.disponibilidad == 1}">Disponible</option>
+                                <option value="0" th:selected="${carros.disponibilidad == 0}">No Disponible</option>
+                            </select>
                         </div>
 
                         <label for="marca">Marca</label>
