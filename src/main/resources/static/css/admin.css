@@ -6,17 +6,54 @@ body {
     padding-top: 70px;
 }
 
+
+.navbar-custom {
+    background-color: rgb(255, 198, 10); 
+}
+.admin-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-width: 2px;
+}
+.admin-card img {
+    width: 80%;
+    height: 200px; 
+    object-fit: cover;
+    border-radius: 7px;
+    margin-left: auto; /* Center image horizontally */
+    margin-right: auto;
+    display: block; /* Ensure margin auto works for centering */
+}
+.admin-card .card-body {
+    flex-grow: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0rem;
+}
+.admin-card .button-container {
+    margin-top: auto;
+    display: flex;
+    gap: 10px;
+}
+.admin-card .btn-custom-sm {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem; 
+    line-height: 1.2; 
+}
+
 .btn-warning {
-    font-weight: normal; /* Cambia el grosor de la fuente */
-    padding: 5px 10px; /* Ajusta el padding para un botón más delgado */
-    border-radius: 3px; /* Redondea las esquinas del botón */
-    font-size: 14px; /* Ajusta el tamaño de la fuente */
-    min-width: 100px; /* Establece un ancho mínimo */
+    font-weight: normal; 
+    padding: 5px 10px; 
+    border-radius: 3px; 
+    font-size: 14px; 
+    min-width: 100px;
 }
 
 .btn-custom {
-    padding: 5px 10px; /* Ajusta el padding para botones de editar y eliminar */
-    font-size: 14px; /* Ajusta el tamaño de la fuente */
+    padding: 5px 10px; 
+    font-size: 14px; 
 }
 
 .card {
@@ -27,11 +64,16 @@ body {
     margin-top: 20px;
 }
 
-button[type="submit"] {
-    background-color: #fdd25a;
-    padding: 10px 20px; /* Ajusta el padding */
-    font-size: 14px; /* Ajusta el tamaño de la fuente */
-    width: auto; /* Cambia a auto para un tamaño más flexible */
-    margin: auto;
-    display: block; /* Asegura que el botón esté centrado */
+.admin-card .button-container {
+    margin-top: auto;
+    display: flex;
+    justify-content: center; 
+    gap: 10px; 
 }
+.admin-card .btn-custom-sm {
+    padding: 0.2rem 0.3rem;
+    font-size: 0.8rem;
+    line-height: 1.2; 
+}
+
+

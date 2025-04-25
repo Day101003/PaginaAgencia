@@ -2,7 +2,6 @@ package com.agencia.agencia.service;
 
 import com.agencia.agencia.model.Usuario;
 import com.agencia.agencia.repository.UsuarioRepository;
-import com.agencia.agencia.service.UsuarioService;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -43,7 +42,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             nuevo.setCorreo(email);
             nuevo.setNombre((String) payload.get("name"));
             nuevo.setRuta_imagen_usuario("default.png");
-            nuevo.setTipo_usuario(2);
+            nuevo.setTipo_usuario(1);
             nuevo.setContrasena(passwordEncoder.encode(UUID.randomUUID().toString()));
             nuevo.setFecha_registro(LocalDate.now());
             nuevo.setTelefono("00000000");
@@ -72,7 +71,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         nuevo.setCorreo(email);
         nuevo.setNombre(oauth2User.getAttribute("name"));
         nuevo.setRuta_imagen_usuario("default.png");
-        nuevo.setTipo_usuario(2);
+        nuevo.setTipo_usuario(1);
         nuevo.setContrasena(passwordEncoder.encode(UUID.randomUUID().toString()));
         nuevo.setFecha_registro(LocalDate.now());
         nuevo.setTelefono("00000000");
@@ -111,6 +110,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void eliminar(int id) {
         usuarioRepository.deleteById(id);
     }
+
+    @Override
+    public Usuario add(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

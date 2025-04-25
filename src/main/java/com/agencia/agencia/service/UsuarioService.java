@@ -15,6 +15,7 @@ public interface UsuarioService extends UserDetailsService {
     List<Usuario> listarUsuarios();
     Optional<Usuario> findByCorreo(String correo);
     Usuario consultar(int id);
+    Usuario add(Usuario u);
     Usuario actualizarUsuario(Usuario u);
     void eliminar(int id);
 }

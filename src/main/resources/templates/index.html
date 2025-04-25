@@ -95,62 +95,196 @@
         <a class="btn btn-primary btn-xl text-uppercase" href="#services">Más información</a>
     </div>
 </header>
-<!-- Portfolio Grid-->
+
+<!-- Servicios (Marcas Carousel) -->
+<section class="page-section bg-light" id="services">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Nuestras Marcas</h2>
+            <h3 class="section-subheading text-muted">Explora las marcas que ofrecemos</h3>
+        </div>
+        <div th:if="${marcas != null and not #lists.isEmpty(marcas)}">
+            <div id="marcasCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div th:each="marca, iterStat : ${marcas}" 
+                         th:if="${iterStat.index % 4 == 0}"
+                         class="carousel-item" 
+                         th:classappend="${iterStat.first} ? 'active' : ''">
+                        <div class="row justify-content-center">
+                            <div th:each="innerIndex : ${#numbers.sequence(iterStat.index, iterStat.index + 2)}"
+                                 th:if="${innerIndex < marcas.size()}"
+                                 class="col-6 col-md-3 mb-4 px-2">
+                                <a th:href="@{/marcasTipos(id_marca=${marcas[innerIndex].id_marca})}"
+                                   class="card text-center text-decoration-none"
+                                   style="border: 2px solid #f1c40f; border-radius: 15px; background: linear-gradient(135deg, #ffffff, #f8f9fa); padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                                    <h5 class="card-title"
+                                        th:text="${marcas[innerIndex].nombre_marca != null ? marcas[innerIndex].nombre_marca : 'Sin Nombre'}"
+                                        style="font-size: 1.8rem; color: #2c3e50; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin: 0;">
+                                    </h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#marcasCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#marcasCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div th:if="${marcas == null or #lists.isEmpty(marcas)}" class="text-center text-muted">
+            <p>No se encontraron marcas disponibles.</p>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<!-- Portfolio Carousel Carros-->
 <section class="page-section bg-light" id="portfolio">
     <div class="container">
         <div class="text-center">
-            <h2 class="section-heading text-uppercase">Nuestros Vehículos</h2>
+            <h2 class="section-heading text-uppercase">Algunos De Nuestros Vehículos</h2>
             <h3 class="section-subheading text-muted">Descubre nuestra amplia selección de carros</h3>
         </div>
-        <div class="row">
-            <div th:each="carro : ${carros}" class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100">
-                    <a class="portfolio-link" data-bs-toggle="modal" 
-                       th:attr="data-bs-target='#portfolioModal' + ${carro.id_carro}">
-                        <img th:src="@{'/' + ${carro.imagenCarros != null ? carro.imagenCarros.ruta_imagen : 'assets/img/default-car.jpg'}}" 
-                             class="card-img-top" alt="Imagen del vehículo" 
-                             style="height: 200px; object-fit: cover;">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <span th:text="${carro.marca != null ? carro.marca.nombre_marca : 'Marca'}"></span>
-                            <span th:text="${carro.modelo != null ? carro.modelo.nombre_modelo : 'Modelo'}"></span>
-                        </h5>
+        <div id="portfolioCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div th:each="carro, iterStat : ${carros}" 
+                     th:if="${iterStat.index % 2 == 0}"
+                     class="carousel-item" 
+                     th:classappend="${iterStat.first} ? 'active' : ''">
+                    <div class="row justify-content-center">
+                    
+                        <div class="col-6 col-md-5 px-2">
+                            <div class="card" style="width: 26rem;">
+                                <a class="portfolio-link" data-bs-toggle="modal" 
+                                   th:attr="data-bs-target='#portfolioModal' + ${carro.id_carro}">
+                                    <img th:src="@{'/' + ${carro.imagenCarros != null ? carro.imagenCarros.ruta_imagen : 'assets/img/default-car.jpg'}}" 
+                                         class="card-img-top" alt="Imagen del vehículo" 
+                                         style="height: 250px; object-fit: cover;">
+                                </a>
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">
+                                        <span th:text="${carro.marca != null ? carro.marca.nombre_marca : 'Marca'}"></span>
+                                        <span th:text="${carro.modelo != null ? carro.modelo.nombre_modelo : 'Modelo'}"></span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div th:if="${iterStat.index + 1 < carros.size()}"
+                             class="col-6 col-md-5 px-2">
+                            <div class="card" style="width: 26rem;">
+                                <a class="portfolio-link" data-bs-toggle="modal" 
+                                   th:attr="data-bs-target='#portfolioModal' + ${carros[iterStat.index + 1].id_carro}">
+                                    <img th:src="@{'/' + ${carros[iterStat.index + 1].imagenCarros != null ? carros[iterStat.index + 1].imagenCarros.ruta_imagen : 'assets/img/default-car.jpg'}}" 
+                                         class="card-img-top" alt="Imagen del vehículo" 
+                                         style="height: 250px; object-fit: cover;">
+                                </a>
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">
+                                        <span th:text="${carros[iterStat.index + 1].marca != null ? carros[iterStat.index + 1].marca.nombre_marca : 'Marca'}"></span>
+                                        <span th:text="${carros[iterStat.index + 1].modelo != null ? carros[iterStat.index + 1].modelo.nombre_modelo : 'Modelo'}"></span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- Controles del carrusel -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23000%27%3E%3Cpath d=%27M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z%27/%3E%3C/svg%3E');"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23000%27%3E%3Cpath d=%27M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z%27/%3E%3C/svg%3E');"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
 </section>
 <!-- Portfolio Modals -->
 <div th:each="carro : ${carros}" class="portfolio-modal modal fade" th:id="'portfolioModal' + ${carro.id_carro}" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
-            <div class="container">
+        <div class="modal-content" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+            <div class="close-modal" data-bs-dismiss="modal" style="position: absolute; right: 20px; top: 20px; cursor: pointer;">
+                <img src="assets/img/close-icon.svg" alt="Close modal" style="width: 24px; height: 24px;" />
+            </div>
+            <div class="container py-5">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <div class="modal-body">
-                            <h2 class="text-uppercase" th:text="${carro.marca.nombre_marca} + ' ' + ${carro.modelo.nombre_modelo}"></h2>
-                            <p class="item-intro text-muted">Perfecto para ti</p>
-                            <img th:src="@{'/' + ${carro.imagenCarros != null ? carro.imagenCarros.ruta_imagen : 'assets/img/default-car.jpg'}}" class="img-fluid d-block mx-auto" alt="..." />
-                            <p>
-                                <strong>Año:</strong> <span th:text="${carro.ano}"></span><br>
-                                <strong>Color:</strong> <span th:text="${carro.color_carro}"></span>
-<br>
-                                <strong>Precio:</strong> $<span th:text="${#numbers.formatDecimal(carro.precio_carro, 1, 2, 'COMMA')}"></span><br>
-                                <strong>Placa:</strong> <span th:text="${carro.numero_placa}"></span><br>
-                                <strong></strong> <span th:class="${carro.disponibilidad} ? 'text-success' : 'text-danger'" 
-                                    th:text="${carro.disponibilidad} ? 'Disponible' : 'Vendido'"></span><br>
-                            </p>
-                            <button class="btn btn-warning btn-sm btn-agregar-carrito" 
-                                    th:disabled="${!carro.disponibilidad}" 
-                                    th:attr="data-id-carro=${carro.id_carro}">
-                                <i class="fas fa-cart-plus"></i> 
-                            </button>
-                            <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                                <i class="fas fa-xmark me-1"></i> Cerrar
-                            </button>
+                        <div class="modal-body text-center">
+                            <h2 class="text-uppercase mb-3" 
+                                th:text="${carro.marca.nombre_marca} + ' ' + ${carro.modelo.nombre_modelo}"
+                                style="font-weight: 700; color: #2c3e50; letter-spacing: 1px;">
+                            </h2>
+                            <p class="item-intro text-muted mb-4" style="font-style: italic;">Perfecto para ti</p>
+                            
+                            <div class="image-container mb-4" style="max-height: 400px; overflow: hidden; border-radius: 10px;">
+                                <img th:src="@{'/' + ${carro.imagenCarros != null ? carro.imagenCarros.ruta_imagen : 'assets/img/default-car.jpg'}}" 
+                                     class="img-fluid" 
+                                     alt="Car Image"
+                                     style="width: 100%; object-fit: cover; transition: transform 0.3s ease;"
+                                     onmouseover="this.style.transform='scale(1.05)'"
+                                     onmouseout="this.style.transform='scale(1)'">
+                            </div>
+
+                            <div class="car-details p-4" style="background: #f8f9fa; border-radius: 10px;">
+                                <div class="row text-left">
+                                    <div class="col-md-6 mb-3">
+                                        <p class="mb-2"><strong>Año:</strong> <span th:text="${carro.ano}"></span></p>
+                                        <p class="mb-2"><strong>Color:</strong> <span th:text="${carro.color_carro}"></span></p>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <p class="mb-2"><strong>Precio:</strong> $<span th:text="${#numbers.formatDecimal(carro.precio_carro, 1, 2, 'COMMA')}"></span></p>
+                                        <p class="mb-2"><strong>Placa:</strong> <span th:text="${carro.numero_placa}"></span></p>
+                                    </div>
+                                    <div class="col-12 mb-3"> 
+                                        <p class="mb-2" style="text-align: center;">
+                                            <strong>Observaciones:</strong> 
+                                            <span th:text="${carro.observaciones}" 
+                                                  style="display: inline-block; max-width: 100%; word-break: break-word; overflow-wrap: break-word; text-align: justify;">
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                                <p class="mb-0">
+                                    <strong>Estado:</strong> 
+                                    <span th:class="${carro.disponibilidad} ? 'text-success' : 'text-danger'" 
+                                          th:text="${carro.disponibilidad} ? 'Disponible' : 'Vendido'"
+                                          style="font-weight: 600;">
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div class="mt-5">
+                                <button class="btn btn-warning btn-lg btn-agregar-carrito me-2" 
+                                        th:disabled="${!carro.disponibilidad}" 
+                                        th:attr="data-id-carro=${carro.id_carro}"
+                                        style="border-radius: 25px; padding: 12px 30px; transition: all 0.3s ease; background: #f1c40f; border: none;"
+                                        onmouseover="this.style.background='#e67e22';"
+                                        onmouseout="this.style.background='#f1c40f';">
+                                    <i class="fas fa-cart-plus me-2"></i> Agregar al Carrito
+                                </button>
+                                <button class="btn btn-primary btn-lg text-uppercase" 
+                                        data-bs-dismiss="modal" 
+                                        type="button"
+                                        style="border-radius: 25px; padding: 12px 30px; transition: all 0.3s ease; background: #10212c; border: none;"
+                                        onmouseover="this.style.background='#10212c';"
+                                        onmouseout="this.style.background=' #133953';">
+                                    <i class="fas fa-xmark me-2"></i> Cerrar
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -158,8 +292,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 
@@ -327,7 +459,7 @@
 <footer class="footer py-4">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2023</div>
+            <div class="col-lg-4 text-lg-start">Copyright &copy; JDNK 2025</div>
             <div class="col-lg-4 my-3 my-lg-0">
                 <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i
                         class="fab fa-twitter"></i></a>
